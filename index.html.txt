@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GTA 5 Interaktive Karte</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>GTA 5 Interaktive Karte</h1>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialisieren der Karte
+        var map = L.map('map').setView([34.052, -118.243], 13);
+
+        // Hinzufügen einer Kachel-Schicht zur Karte
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Kartendaten © Rockstar Games',
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Beispiel Marker-Daten
+        var locations = [
+            {name: "Fleeca Bank", coords: [34.069, -118.405]},
+            {name: "Ammu-Nation", coords: [34.052, -118.243]},
+            {name: "Los Santos Customs", coords: [34.048, -118.247]}
+        ];
+
+        // Hinzufügen von Markern zur Karte
+        locations.forEach(function(location) {
+            L.marker(location.coords).addTo(map)
+                .bindPopup(location.name);
+        });
+    </script>
+</body>
+</html>
